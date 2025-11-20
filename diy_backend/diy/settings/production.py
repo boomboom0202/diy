@@ -5,7 +5,10 @@ DEBUG = False
 
 ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', '').split(',')
 
-SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY')
+
+SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', '')
+
+
 if not SECRET_KEY:
     raise ValueError("DJANGO_SECRET_KEY must be set in production environment")
 

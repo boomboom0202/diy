@@ -2,12 +2,11 @@ import os
 from pathlib import Path
 from dotenv import load_dotenv
 
-# Загружаем переменные окружения из .env файла
+
 load_dotenv()
 
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
 
-SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', 'django-insecure-change-me-later-1234567890')
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -59,9 +58,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'diy.wsgi.application'
 
-# База данных PostgreSQL
-# Если в окружении заданы параметры БД — они будут использованы.
-# Иначе по умолчанию используется sqlite3 (удобно для локальной разработки).
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
@@ -99,3 +96,26 @@ CORS_ALLOWED_ORIGINS = [
 ]
 CORS_ALLOW_CREDENTIALS = True
 
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {
+        'console': {
+            'class': 'logging.StreamHandler',
+        }
+    },
+    'loggers': {
+        'django.db.backends': {
+            'handlers': ['console'],
+            'level': 'DEBUG',  
+        },
+        'django': {
+            'handlers': ['console'],
+            'level': 'INFO',
+        },
+    }
+}
+
+INTERNAL_IPS = ['127.0.0.1', 'localhost']
+
+EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
