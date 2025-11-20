@@ -1,0 +1,53 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environments
+.env
+.env.*
+.venv/
+venv/
+env/
+ENV/
+
+# Installer / build files
+build/
+dist/
+*.egg-info/
+.eggs/
+pip-wheel-metadata/
+
+# Database
+db.sqlite3
+
+# Django
+media/
+static/
+staticfiles/
+# keep migrations (but not their caches)
+*/migrations/__pycache__/
+
+# Logs, coverage, test artifacts
+*.log
+.coverage
+htmlcov/
+.pytest_cache/
+
+# IDEs
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Docker
+docker-compose.override.yml
+
+# Other
+*.pyo
+*.pyd
+```# filepath: c:\Users\abyla\Desktop\coolsite\diy_backend\.gitignore
