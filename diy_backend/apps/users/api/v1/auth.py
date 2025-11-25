@@ -17,7 +17,7 @@ class CustomTokenObtainPairView(TokenObtainPairView):
         access = tokens.pop("access")
         refresh = tokens.pop("refresh")
 
-        res = Response({"detail": "Успешный вход"}, status=status.HTTP_200_OK)
+        res = Response({"detail": "Успешный вход", "access": access,"refresh": refresh},status=status.HTTP_200_OK)
         res.set_cookie(
             key="access",
             value=access,
