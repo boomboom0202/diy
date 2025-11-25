@@ -1,7 +1,7 @@
 from rest_framework_simplejwt.views import TokenObtainPairView
 from rest_framework.permissions import AllowAny
 from drf_spectacular.utils import extend_schema
-
+from ...utils.responses import created
 from ...utils.cookies import set_auth_cookies, set_csrf_cookie, clear_auth_cookies
 from ...utils.responses import ok
 from ...serializers.auth import MeSerializer, RegisterSerializer
@@ -30,11 +30,32 @@ class LogoutView(APIView):
         clear_auth_cookies(response)
         return response
 
+class VerifyEmailView(APIView):
+    permission_classes = [AllowAny]
+    
+    def post(self, request):
+        token = request.data.get('token')
+        # Логика проверки токена
+        # user.is_email_verified = True
+        # user.save()
+        return ok("Email успешно верифицирован")
 
 class MeView(APIView):
     @extend_schema(responses=MeSerializer)
     def get(self, request):
-        return Response(MeSerializer(request.user).data)
+        serializer = MeSerializer(request.user)
+        return Response(serializer.data)
+    
+    def patch(self, request):
+        """Позволить пользователю обновить свой профиль"""
+        serializer = MeSerializer(
+            request.user, 
+            data=request.data, 
+            partial=True
+        )
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        return Response(serializer.data)
     
 
 class RegisterView(CreateAPIView):

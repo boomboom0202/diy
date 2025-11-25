@@ -9,3 +9,4 @@ def created(message, **extra):
 
 def bad_request(message, **extra):
     return Response({"detail": message, **extra}, status=status.HTTP_400_BAD_REQUEST)
+
