@@ -117,25 +117,6 @@ CORS_ALLOWED_ORIGINS = [
 ]
 CORS_ALLOW_CREDENTIALS = True
 
-LOGGING = {
-    'version': 1,
-    'disable_existing_loggers': False,
-    'handlers': {
-        'console': {
-            'class': 'logging.StreamHandler',
-        }
-    },
-    'loggers': {
-        'django.db.backends': {
-            'handlers': ['console'],
-            'level': 'DEBUG',  
-        },
-        'django': {
-            'handlers': ['console'],
-            'level': 'INFO',
-        },
-    }
-}
 
 INTERNAL_IPS = ['127.0.0.1', 'localhost']
 
