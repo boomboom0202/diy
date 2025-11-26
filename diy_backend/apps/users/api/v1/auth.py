@@ -4,10 +4,12 @@ from rest_framework.response import Response
 from rest_framework_simplejwt.views import TokenObtainPairView
 from rest_framework_simplejwt.tokens import RefreshToken
 from django.middleware.csrf import get_token
-from ...serializers.register import RegisterSerializer
 from drf_spectacular.utils import extend_schema, OpenApiResponse
 from drf_spectacular.utils import inline_serializer
 from rest_framework import serializers
+from ...serializers.auth import MeSerializer
+from ...serializers.register import RegisterSerializer
+from ...utils.responses import ok
 
 # Логин — переопределяем, чтобы ставить куки
 class CustomTokenObtainPairView(TokenObtainPairView):
@@ -17,7 +19,7 @@ class CustomTokenObtainPairView(TokenObtainPairView):
         access = tokens.pop("access")
         refresh = tokens.pop("refresh")
 
-        res = Response({"detail": "Успешный вход", "access": access,"refresh": refresh},status=status.HTTP_200_OK)
+        res = Response({"detail": "Успешный вход"}, status=status.HTTP_200_OK)
         res.set_cookie(
             key="access",
             value=access,
@@ -38,19 +40,6 @@ class CustomTokenObtainPairView(TokenObtainPairView):
         res.set_cookie("csrftoken", get_token(request), httponly=False, samesite="Lax")
         return res
 
-# Регистрация
-class RegisterView(APIView):
-    permission_classes = [permissions.AllowAny]
-
-    @extend_schema(
-        request=RegisterSerializer,
-        responses={201: OpenApiResponse(description="Пользователь создан")},
-    )
-    def post(self, request):
-        serializer = RegisterSerializer(data=request.data)
-        serializer.is_valid(raise_exception=True)
-        user = serializer.save()
-        return Response({"detail": "Пользователь создан"}, status=status.HTTP_201_CREATED)
 
 # Логаут (чистим куки)
 class LogoutView(APIView):
