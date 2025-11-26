@@ -1,14 +1,11 @@
 # users/api/v1/email_verification.py
 from rest_framework.views import APIView
-from rest_framework.response import Response
 from rest_framework.permissions import AllowAny, IsAuthenticated
-from rest_framework import status
 from drf_spectacular.utils import extend_schema
 from django.shortcuts import get_object_or_404
-
 from ...models import EmailVerificationToken
-from ...services.email_service import EmailService
-from ...utils.responses import ok, bad_request
+from ...services.email_service import *
+from ...utils.responses import *
 
 
 class VerifyEmailView(APIView):
