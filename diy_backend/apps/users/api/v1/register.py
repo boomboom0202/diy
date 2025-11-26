@@ -6,7 +6,7 @@ from ...serializers.register import RegisterSerializer
 from rest_framework.generics import CreateAPIView
 from ...services.email_service import EmailService
 from rest_framework.permissions import AllowAny
-
+from ...tasks import send_verification_email_task
 
 class RegisterView(CreateAPIView):
     serializer_class = RegisterSerializer
@@ -20,7 +20,7 @@ class RegisterView(CreateAPIView):
         
         # Отправляем письмо с подтверждением
         try:
-            EmailService.send_verification_email(user, request)
+            send_verification_email_task.delay(user.id)
         except Exception as e:
             # Логируем ошибку, но регистрация прошла успешно
             print(f"Failed to send verification email: {e}")

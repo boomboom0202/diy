@@ -2,13 +2,11 @@ from rest_framework import status, permissions
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework_simplejwt.views import TokenObtainPairView
-from rest_framework_simplejwt.tokens import RefreshToken
+
 from django.middleware.csrf import get_token
 from drf_spectacular.utils import extend_schema, OpenApiResponse
 from drf_spectacular.utils import inline_serializer
 from rest_framework import serializers
-from ...serializers.auth import MeSerializer
-from ...serializers.register import RegisterSerializer
 from ...utils.responses import ok
 
 # Логин — переопределяем, чтобы ставить куки
