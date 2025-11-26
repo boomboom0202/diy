@@ -41,6 +41,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'apps.users.middleware.EmailVerificationMiddleware'  
 ]
 
 ROOT_URLCONF = 'config.urls'
@@ -120,4 +121,6 @@ CORS_ALLOW_CREDENTIALS = True
 
 INTERNAL_IPS = ['127.0.0.1', 'localhost']
 
-EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
+SITE_NAME = 'DIY Platform'
+
+ 
