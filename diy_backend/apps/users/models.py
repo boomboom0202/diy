@@ -37,7 +37,6 @@ class EmailVerificationToken(models.Model):
         super().save(*args, **kwargs)
 
     def is_valid(self):
-        """Проверка валидности токена"""
         return (
             not self.is_used 
             and self.expires_at > timezone.now()
