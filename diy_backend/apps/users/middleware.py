@@ -1,4 +1,3 @@
-# users/middleware.py
 from django.http import JsonResponse
 from django.urls import resolve
 
@@ -26,5 +25,3 @@ class EmailVerificationMiddleware:
 
         return self.get_response(request)
 
-# В settings.py MIDDLEWARE добавить:
-# 'users.middleware.EmailVerificationMiddleware',

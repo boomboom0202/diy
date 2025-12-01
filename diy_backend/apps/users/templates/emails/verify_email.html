@@ -24,7 +24,7 @@
         <p>Здравствуйте{% if user.first_name %}, {{ user.first_name }}{% endif %}!</p>
         <p>Спасибо за регистрацию на {{ site_name }}. Пожалуйста, подтвердите ваш email адрес, нажав на кнопку ниже:</p>
         
-        <a href="{{ verification_url }}" class="button">Подтвердить email</a>
+        <a href="{{ verification_url }}" class="button" style="color: white !important;">Подтвердить email</a>
         
         <p>Или скопируйте эту ссылку в браузер:</p>
         <p><a href="{{ verification_url }}">{{ verification_url }}</a></p>

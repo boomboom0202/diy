@@ -1,2 +1,10 @@
-﻿// Точка входа приложения: сюда позже добавим инициализацию фреймворка (React/Vue/Solid).
-// Здесь же подключим глобальные стили и корневые провайдеры.
+import { StrictMode } from 'react'
+import { createRoot } from 'react-dom/client'
+import './index.css'
+import App from './App.tsx'
+
+createRoot(document.getElementById('root')!).render(
+  <StrictMode>
+    <App />
+  </StrictMode>,
+)
