@@ -20,7 +20,7 @@ class RegisterView(CreateAPIView):
         
         # Отправляем письмо с подтверждением
         try:
-            send_verification_email_task.delay(user.id)
+            EmailService.send_verification_email(user)
         except Exception as e:
             # Логируем ошибку, но регистрация прошла успешно
             print(f"Failed to send verification email: {e}")
