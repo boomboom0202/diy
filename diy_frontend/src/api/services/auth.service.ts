@@ -8,6 +8,9 @@ import type {
 } from '../../types/auth.types';
 
 export const authService = {
+  getAccessToken: () => localStorage.getItem('access_token'),
+  getRefreshToken: () => localStorage.getItem('refresh_token'),
+
   // Регистрация нового пользователя
   register: async (data: RegisterData) => {
     const response = await apiClient.post(AUTH_ENDPOINTS.REGISTER, data);
