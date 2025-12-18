@@ -6,9 +6,12 @@ from django.shortcuts import get_object_or_404
 from ...models import EmailVerificationToken
 from ...services.email_service import *
 from ...utils.responses import *
+from rest_framework.generics import GenericAPIView
+from ...serializers.email_verification import EmailVerificationSerializer
 
 
-class VerifyEmailView(APIView):
+class VerifyEmailView(GenericAPIView):
+    serializer_class = EmailVerificationSerializer
     permission_classes = [AllowAny]
 
     @extend_schema(
@@ -48,7 +51,8 @@ class VerifyEmailView(APIView):
         return ok("Email успешно подтвержден")
 
 
-class ResendVerificationEmailView(APIView):
+class ResendVerificationEmailView(GenericAPIView):
+    serializer_class = EmailVerificationSerializer
     permission_classes = [IsAuthenticated]
 
     @extend_schema(
